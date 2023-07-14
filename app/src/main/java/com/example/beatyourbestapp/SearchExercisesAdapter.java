@@ -83,9 +83,6 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
             cardView = itemView.findViewById(R.id.exercises_card);
 
         }
-
-
     }
-
 
 }
