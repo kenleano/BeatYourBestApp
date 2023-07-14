@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RecyclerViewDemo</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="addWorkout">Add Workout</string>
+    <string name="workoutRoutines">WORKOUT ROUTINES</string>
+    <string name="addExercise">Add Exercise</string>
+    <string name="startWorkout">Start</string>
+    <string name="set">Set</string>
+    <string name="previous">Previous</string>
+    <string name="weight">Weight</string>
+    <string name="reps">Reps</string>
+
+
+</resources>

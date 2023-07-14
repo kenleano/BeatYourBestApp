@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:id="@+id/card_view"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="#2C2C2E"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:contentPadding="4dp"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true"
+
+
+    >
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:id="@+id/workout_title"
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="80dp" />
+
+        <TextView
+            android:id="@+id/set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/workout_title"
+            />
+        <TextView
+            android:id="@+id/previous"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:text="@string/previous"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/workout_title"
+            android:layout_toEndOf="@id/set"
+            />
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/weight"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/workout_title"
+
+            android:layout_toStartOf="@id/reps"
+            android:layout_marginEnd="50dp"
+            />
+
+        <TextView
+            android:id="@+id/reps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/workout_title"
+            android:layout_alignEnd="@id/workout_title"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="75dp"
+
+            android:text="@string/reps" />
+
+    </RelativeLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" /> <!-- Set the background color of the EditText -->
+    <corners android:radius="20dp" /> <!-- Adjust the radius to control the roundness -->
+    <stroke
+        android:width="2dp"
+    android:color="#FFFFFF" />
+</shape>
