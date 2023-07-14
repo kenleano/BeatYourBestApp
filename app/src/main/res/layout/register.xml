@@ -12,66 +12,84 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-   app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/signup_bg"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-73dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/signup_bg" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="264dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="73dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="487dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="264dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="73dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Email"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="424dp" />
+        android:hint="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editTextTextPasswordAgain"
-        android:layout_width="264dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="73dp"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="552dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <Button
-        android:id="@+id/addWorkoutBtn"
+        android:id="@+id/RegisterAccountBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="37dp"
         android:background="@drawable/rounded_button_background"
         android:backgroundTint="#D0FD3E"
         android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="#1C1C1E"
-        tools:layout_editor_absoluteX="275dp"
-        tools:layout_editor_absoluteY="646dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:onClick="onLoginClick"
         android:text="@string/login"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="25dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
+        android:textColor="@color/green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="25dp"
         android:text="@string/register"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="25dp" />
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

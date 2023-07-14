@@ -1,4 +1,4 @@
-package com.example.recyclerviewdemo;
+package com.example.beatyourbestapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

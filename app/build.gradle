@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.recyclerviewdemo'
+    namespace 'com.example.beatyourbestapp'
     compileSdk 33
 
     defaultConfig {

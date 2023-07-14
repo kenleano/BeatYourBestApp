@@ -46,4 +46,11 @@
         android:entries="@array/menu_items"
 
         android:background="@drawable/rounded_button_background"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exercisesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/bodyPartSpinner"/>
 </RelativeLayout>

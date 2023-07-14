@@ -1,4 +1,4 @@
-package com.example.recyclerviewdemo;
+package com.example.beatyourbestapp;
 
 import android.view.LayoutInflater;
 import android.view.View;
