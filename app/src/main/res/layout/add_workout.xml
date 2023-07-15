@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@drawable/rounded_medium"
+    android:backgroundTint="#1C1C1E" >
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Workout Name EditText -->
+            <EditText
+                android:id="@+id/editTextWorkoutName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Workout Name"
+                android:minHeight="48dp" />
+
+            <!-- Day of the Week Spinner -->
+            <Spinner
+                android:id="@+id/spinnerDayOfWeek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:entries="@array/days_of_week"
+                android:minHeight="48dp" />
+
+            <!-- Add Routine Button -->
+            <Button
+                android:id="@+id/buttonAddRoutine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Add Routine" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

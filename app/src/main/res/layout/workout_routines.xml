@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button_background"
         android:text="@string/addWorkout"
+        android:onClick="addWorkout"
         android:textAllCaps="false"
         android:textColor="#1C1C1E"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,17 +20,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login);
         emailLogin = findViewById(R.id.emailLogin);
         passwordLogin = findViewById(R.id.passwordLogin);
-        loginButton = findViewById(R.id.LoginBtn);
+        //loginButton = findViewById(R.id.LoginBtn);
         registerButton = findViewById(R.id.RegisterBtn);
 
-        // Set click listener for Login button
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Perform login logic here
-                loginUser();
-            }
-        });
+
     }
 
     private void loginUser() {
