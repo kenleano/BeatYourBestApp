@@ -15,10 +15,10 @@
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".WorkoutRoutines"/>
-        <activity android:name=".Login"/>
+        <activity android:name=".SearchExercises"/>
 
         <activity
-            android:name=".SearchExercises"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

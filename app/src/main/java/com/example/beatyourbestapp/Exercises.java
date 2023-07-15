@@ -24,6 +24,9 @@ public class Exercises {
         this.bodyPart = bodyPart;
     }
 
+    public Exercises(String name, String equipment, String bodyPart) {
+    }
+
     public String getExerciseName() {
         return exerciseName;
     }

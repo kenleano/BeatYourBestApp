@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
@@ -30,21 +31,25 @@ public class SearchExercises extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
 
-TextView textView;
+
+    TextView textView;
     private RequestQueue requestQueue;
     private ArrayList<Exercises> exercisesList;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_exercises);
         textView = findViewById(R.id.test);
+
         recyclerView = findViewById(R.id.exercisesRecyclerView);
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
 
+        recyclerView.setLayoutManager(layoutManager);
         requestQueue = com.example.popularmovies.VolleySingleton.getInstance(this).getRequestQueue();
         exercisesList = new ArrayList<>();
-       fetchExercises();
+        fetchExercises();
     }
+
 
     private void fetchExercises() {
         String url = "https://exercisedb.p.rapidapi.com/exercises";
@@ -54,41 +59,34 @@ TextView textView;
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray jsonArray = response.getJSONArray("results");
+                            JSONArray jsonArray = new JSONArray(response); // Use the response directly as a JSON array
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String name = jsonObject.getString("name");
-                                String equipment = jsonObject.getString("equipment");
-                                String bodyPart = jsonObject.getString("bodyPart");
-                                String imgUrl = jsonObject.getString("gifUrl");
 
-                                Exercises exercises = new Exercises(name, imgUrl, equipment, bodyPart);
+                                String target = jsonObject.getString("target");
+                                String equipment = jsonObject.getString("equipment");
+                                String imgUrl = jsonObject.getString("gifUrl");
+                                String name = jsonObject.getString("name");
+
+                                Exercises exercises = new Exercises(name, imgUrl, equipment, target);
                                 exercisesList.add(exercises);
                             }
+                            SearchExercisesAdapter adapter = new SearchExercisesAdapter(SearchExercises.this, exercisesList);
+                            recyclerView.setAdapter(adapter);
 
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (exercisesList.isEmpty()) {
-                                        textView.setText("Empty");
-                                        Toast.makeText(SearchExercises.this, "No data available", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        textView.setText("Data");
-                                        SearchExercisesAdapter adapter = new SearchExercisesAdapter(SearchExercises.this, exercisesList);
-                                        recyclerView.setAdapter(adapter);
-                                    }
-                                }
-                            });
-                        } catch (Exception e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
+                            Log.e("JSON Parsing Error", "Error parsing JSON: " + e.getMessage());
                         }
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                textView.setText("API Error: " + error.toString());
+                String errorMessage = error.getMessage(); // Get the error message
+                Log.e("Error", errorMessage);
+                Toast.makeText(SearchExercises.this, "Error fetching data", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override

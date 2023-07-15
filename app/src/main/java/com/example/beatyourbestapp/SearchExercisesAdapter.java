@@ -43,23 +43,23 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
 
         Picasso.get().load(exercises.getGifUrl()).into(holder.image);
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, ExerciseDetailActivity.class);
-                Bundle bundle = new Bundle();
-
-                bundle.putString("name", exercises.getExerciseName());
-                bundle.putString("equipment", exercises.getEquipment());
-                bundle.putString("target", exercises.getExerciseTarget());
-                bundle.putString("gif", exercises.getGifUrl());
-
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-
-            }
-        });
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(context, ExerciseDetailActivity.class);
+//                Bundle bundle = new Bundle();
+//
+//                bundle.putString("name", exercises.getExerciseName());
+//                bundle.putString("equipment", exercises.getEquipment());
+//                bundle.putString("target", exercises.getExerciseTarget());
+//                bundle.putString("gif", exercises.getGifUrl());
+//
+//                intent.putExtras(bundle);
+//                context.startActivity(intent);
+//
+//            }
+//        });
 
     }
 
@@ -72,7 +72,7 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
         ImageView image;
         TextView name, equipment, target;
 
-        CardView cardView;
+        //CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,7 +80,7 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
             name = itemView.findViewById(R.id.exercise_name);
             equipment = itemView.findViewById(R.id.exercise_equipment);
             target = itemView.findViewById(R.id.exercise_target);
-            cardView = itemView.findViewById(R.id.exercises_card);
+           // cardView = itemView.findViewById(R.id.exercises_card);
 
         }
     }
