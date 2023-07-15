@@ -45,6 +45,10 @@ public class SearchExercises extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(layoutManager);
+        //Newly added:
+//        adapter = new SearchExercisesAdapter(this, exercisesList);
+//        recyclerView.setAdapter(adapter);
+
         requestQueue = com.example.popularmovies.VolleySingleton.getInstance(this).getRequestQueue();
         exercisesList = new ArrayList<>();
         fetchExercises();
@@ -59,7 +63,7 @@ public class SearchExercises extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray jsonArray = new JSONArray(response); // Use the response directly as a JSON array
+                            JSONArray jsonArray = response.getJSONArray("data"); // Use the response directly as a JSON array
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -69,11 +73,19 @@ public class SearchExercises extends AppCompatActivity {
                                 String imgUrl = jsonObject.getString("gifUrl");
                                 String name = jsonObject.getString("name");
 
+
                                 Exercises exercises = new Exercises(name, imgUrl, equipment, target);
                                 exercisesList.add(exercises);
+
                             }
-                            SearchExercisesAdapter adapter = new SearchExercisesAdapter(SearchExercises.this, exercisesList);
+                            adapter = new SearchExercisesAdapter(SearchExercises.this, exercisesList);
                             recyclerView.setAdapter(adapter);
+
+                            for (Exercises exercises : exercisesList) {
+                                Log.d("Exercises List Size", "Size: " + exercises.toString());
+                            }
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -84,6 +96,7 @@ public class SearchExercises extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                textView.setText(error.toString());
                 String errorMessage = error.getMessage(); // Get the error message
                 Log.e("Error", errorMessage);
                 Toast.makeText(SearchExercises.this, "Error fetching data", Toast.LENGTH_LONG).show();
