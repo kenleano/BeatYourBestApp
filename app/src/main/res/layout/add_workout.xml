@@ -7,21 +7,33 @@
     android:backgroundTint="#1C1C1E" >
 
     <androidx.cardview.widget.CardView
+        android:backgroundTint="#1C1C1E"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/addRoutineTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add a Routine"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"/>
 
             <!-- Workout Name EditText -->
             <EditText
                 android:id="@+id/editTextWorkoutName"
+                android:layout_below="@id/addRoutineTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Workout Name"
+                android:layout_marginTop="16dp"
                 android:minHeight="48dp" />
 
             <!-- Day of the Week Spinner -->
@@ -31,7 +43,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:entries="@array/days_of_week"
-                android:minHeight="48dp" />
+                android:minHeight="48dp"
+                android:layout_below="@id/editTextWorkoutName"/>
 
             <!-- Add Routine Button -->
             <Button
@@ -39,8 +52,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Add Routine" />
+                android:layout_alignParentRight="true"
+                android:background="@drawable/rounded_button_background"
+                android:text="Add Routine"
+                android:layout_below="@id/spinnerDayOfWeek"/>
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/buttonCancelAddRoutine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/buttonAddRoutine"
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/spinnerDayOfWeek"
+
+                android:text="Cancel" />
+
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
