@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLoginSuccess(View view) {
-        Intent intent = new Intent(this, WorkoutRoutines.class);
+        Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
 }

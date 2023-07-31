@@ -29,7 +29,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@color/purple_200"
+            android:src="@color/green"
             android:layout_height="100dp"
             />
         <TextView

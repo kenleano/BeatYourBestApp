@@ -52,6 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:paddingHorizontal="10dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/rounded_button_background"
                 android:text="Add Routine"
@@ -59,8 +61,13 @@
 
             <Button
                 android:id="@+id/buttonCancelAddRoutine"
+                android:textColor="@color/white"
+                android:paddingHorizontal="10dp"
+                android:layout_marginEnd="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_button_background"
+                android:backgroundTint="@color/lightgray"
                 android:layout_toLeftOf="@id/buttonAddRoutine"
                 android:layout_marginTop="16dp"
                 android:layout_below="@id/spinnerDayOfWeek"

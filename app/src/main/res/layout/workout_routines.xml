@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1C1C1E">
 
-
     <Button
         android:id="@+id/addWorkoutBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button_background"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
         android:onClick="addWorkout"
+        android:background="@drawable/rounded_button_background"
         android:text="@string/addWorkout"
         android:textAllCaps="false"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="10dp"
-        android:textColor="#1C1C1E"
-        android:layout_alignParentBottom="true" />
+        android:textColor="#1C1C1E" />
 
     <TextView
         android:id="@+id/workoutRoutinesTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
+        android:paddingTop="10dp"
         android:text="@string/workoutRoutines"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workoutRoutinesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workoutRoutinesTitle"
+        android:layout_above="@id/addWorkoutBtn"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_centerInParent="true"
+        />
 
 </RelativeLayout>
