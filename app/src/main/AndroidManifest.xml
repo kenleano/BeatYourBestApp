@@ -19,12 +19,12 @@
             android:name=".ExercisesLayout" />
         <activity
             android:name=".AddExercise" />
-        <activity android:name=".Register" />
+        <activity android:name=".MainMenu" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SearchExercises" />
-        <activity android:name=".Login" />
+        <activity android:name=".LoginAndRegister.Login" />
         <activity
-            android:name=".MainMenu"
+            android:name=".LoginAndRegister.Register"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

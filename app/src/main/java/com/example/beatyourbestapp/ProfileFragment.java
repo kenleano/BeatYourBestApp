@@ -1,5 +1,6 @@
 package com.example.beatyourbestapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.beatyourbestapp.LoginAndRegister.Login;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +22,8 @@ public class ProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    FirebaseAuth auth;
+    FirebaseUser user;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -53,6 +60,17 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if (user == null) {
+            // No user is signed in
+            Intent intent = new Intent(getContext(), Login.class);
+            startActivity(intent);
+
+        } else {
+            // User logged in
+        }
     }
 
     @Override
@@ -60,5 +78,9 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    public void logOut(View view) {
+        FirebaseAuth.getInstance().signOut();
     }
 }
