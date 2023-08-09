@@ -14,19 +14,17 @@
         android:theme="@style/Theme.RecyclerViewDemo"
         tools:targetApi="31">
         <activity
-            android:name=".ExerciseDetail"
-            android:exported="false" />
-        <activity
-            android:name=".ExerciseDetail"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".WorkoutRoutines" /> -->
+            android:name=".ExerciseDetail" />
+
         <activity android:name=".ExercisesLayout" />
-        <activity android:name=".MainMenu" />
+        <activity android:name=".SearchExercises" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".LoginAndRegister.Register" />
+        <activity android:name=".MainMenu" />
+
+<!--        <activity android:name=".LoginAndRegister.Register" />-->
         <activity android:name=".LoginAndRegister.Login" />
         <activity
-            android:name=".SearchExercises"
+            android:name=".LoginAndRegister.Register"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

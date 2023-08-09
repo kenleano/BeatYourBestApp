@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
-
+       // FirebaseDatabase.getInstance().getReference().child("Exercises").child("Android").setValue("Test");
     }
 
-    //FirebaseDatabase.getInstance().getReference().child("Exercises").setValue("Test");
+
 
 
 }
