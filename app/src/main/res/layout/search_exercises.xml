@@ -8,8 +8,8 @@
     android:backgroundTint="#1C1C1E"
     >
 
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchBarExercises"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="12"
@@ -22,7 +22,6 @@
         android:layout_marginEnd="10dp" />
 
 
-
     <Spinner
         android:id="@+id/equipmentSpinner"
         android:layout_marginTop="8dp"
@@ -30,8 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:entries="@array/menu_items"
-        android:layout_alignEnd="@id/editTextTextPersonName2"
-        android:layout_below="@id/editTextTextPersonName2"
+        android:layout_alignEnd="@id/searchBarExercises"
+        android:layout_below="@id/searchBarExercises"
         android:background="@drawable/rounded_button_background"/>
 
     <Spinner
@@ -39,7 +38,7 @@
         android:layout_width="wrap_content"
         android:paddingHorizontal="8dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextTextPersonName2"
+        android:layout_below="@id/searchBarExercises"
         android:layout_alignStart="@id/equipmentSpinner"
         android:layout_marginStart="-90dp"
         android:layout_marginTop="8dp"
@@ -54,14 +53,4 @@
         android:layout_marginTop="20dp"
         android:layout_below="@id/bodyPartSpinner"/>
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="test"
-        android:gravity="center"/>
 </RelativeLayout>

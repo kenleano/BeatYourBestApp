@@ -16,42 +16,12 @@ public class ExercisesLayout extends AppCompatActivity {
     }
 
     public void addExercise(View view) {
-        Intent intent = new Intent(this, AddExercise.class);
+        Intent intent = new Intent(this, SearchExercises.class);
         startActivity(intent);
     }
 
     public void startExercise(View view) {
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     
 }

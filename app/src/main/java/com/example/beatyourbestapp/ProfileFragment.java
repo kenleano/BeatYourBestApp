@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.beatyourbestapp.LoginAndRegister.Login;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,7 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public Button button;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -56,21 +58,22 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        if (user == null) {
-            // No user is signed in
-            Intent intent = new Intent(getContext(), Login.class);
-            startActivity(intent);
-
-        } else {
-            // User logged in
-        }
+       // button = rootView.findViewById(R.id.btnLogout);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
+//
+//        auth = FirebaseAuth.getInstance();
+//        user = auth.getCurrentUser();
+//        if (user == null) {
+//            // No user is signed in
+//            Intent intent = new Intent(getContext(), Login.class);
+//            startActivity(intent);
+//
+//        } else {
+//            // User logged in
+//        }
     }
 
     @Override
@@ -82,5 +85,8 @@ public class ProfileFragment extends Fragment {
 
     public void logOut(View view) {
         FirebaseAuth.getInstance().signOut();
+        // You might want to navigate to the login screen after logging out
+        Intent intent = new Intent(getContext(), Login.class);
+        startActivity(intent);
     }
 }

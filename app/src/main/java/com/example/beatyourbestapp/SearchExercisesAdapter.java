@@ -18,12 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercisesAdapter.ViewHolder> {
-    private ArrayList<Exercises> exercisesList;
+    public static ArrayList<Exercises> exercisesList;
+    private ArrayList<Exercises> filteredList;
     private Context context;
 
     public SearchExercisesAdapter(Context context, ArrayList<Exercises> exercisesList) {
         this.context = context;
         this.exercisesList = exercisesList;
+        this.filteredList = new ArrayList<>(); // Initialize filteredList
     }
 
     @NonNull
@@ -43,26 +45,24 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
 
         Picasso.get().load(exercises.getGifUrl()).into(holder.image);
 
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context, ExerciseDetailActivity.class);
-//                Bundle bundle = new Bundle();
-//
-//                bundle.putString("name", exercises.getExerciseName());
-//                bundle.putString("equipment", exercises.getEquipment());
-//                bundle.putString("target", exercises.getExerciseTarget());
-//                bundle.putString("gif", exercises.getGifUrl());
-//
-//                intent.putExtras(bundle);
-//                context.startActivity(intent);
-//
-//            }
-//        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ExerciseDetail.class);
+                Bundle bundle = new Bundle();
 
+                bundle.putString("name", exercises.getExerciseName());
+                bundle.putString("equipment", exercises.getEquipment());
+                bundle.putString("target", exercises.getExerciseTarget());
+                bundle.putString("gif", exercises.getGifUrl());
+
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+
+            }
+        });
     }
-
     @Override
     public int getItemCount() {
         return exercisesList.size();
@@ -72,7 +72,7 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
         ImageView image;
         TextView name, equipment, target;
 
-        //CardView cardView;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,9 +80,13 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
             name = itemView.findViewById(R.id.exercise_name);
             equipment = itemView.findViewById(R.id.exercise_equipment);
             target = itemView.findViewById(R.id.exercise_target);
-           // cardView = itemView.findViewById(R.id.exercises_card);
+           cardView = itemView.findViewById(R.id.exercises_card);
 
         }
     }
 
+    public void setFilteredList(ArrayList<Exercises> filteredList) {
+        this.filteredList = filteredList;
+        notifyDataSetChanged();
+    }
 }
