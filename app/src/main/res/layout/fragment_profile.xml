@@ -1,22 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    android:background="@color/darkgray"
 
-    <!-- TODO: Update blank fragment layout -->
+    >
+
+
+
+    <!-- Profile Image View -->
+    <ImageView
+        android:id="@+id/profileImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/circle"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/baseline_person_24"
+    android:layout_marginTop="24dp"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="profile" />
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_gravity="center"
+        android:id="@+id/profileName"
+        android:text="Profile Name"
+        android:textColor="@color/green"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+     android:layout_below="@id/profileImageView"
+        android:textStyle="bold"
+        />
+
+    <!-- Email -->
+    <TextView
+        android:id="@+id/textEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileName"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:text="Email"
+        android:textColor="@color/green"
+        android:layout_marginHorizontal="20dp"
+
+        />
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textEmail"
+        android:layout_marginTop="4dp"
+        android:padding="16dp"
+        android:hint="Enter email"
+        android:inputType="textEmailAddress"
+
+        android:layout_marginHorizontal="20dp"
+        />
+
+    <!-- Password -->
+    <TextView
+        android:id="@+id/textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editEmail"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:textColor="@color/green"
+        android:layout_marginHorizontal="20dp"
+        android:text="Password"/>
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textPassword"
+        android:layout_marginTop="4dp"
+        android:padding="16dp"
+        android:hint="Enter password"
+        android:textColor="@color/green"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="textPassword"/>
+
+    <!-- Confirm Password -->
+    <TextView
+        android:id="@+id/textConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editPassword"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:textColor="@color/green"
+        android:layout_marginHorizontal="20dp"
+        android:text="Confirm Password"/>
+
+    <EditText
+        android:id="@+id/editConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textConfirmPassword"
+        android:layout_marginTop="4dp"
+        android:padding="16dp"
+        android:textColor="@color/green"
+        android:layout_marginHorizontal="20dp"
+        android:hint="Confirm password"
+        android:inputType="textPassword"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editConfirmPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/darkgray"
+        android:background="@drawable/rounded_button_background"
+        android:text="Save"/>
+
+    <!-- Logout Button -->
+    <Button
         android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnSave"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_medium"
+        android:backgroundTint="@color/lightgray"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Logout"
         android:onClick="logOut"/>
 
-
-</FrameLayout>
+</RelativeLayout >

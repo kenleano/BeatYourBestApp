@@ -1,14 +1,20 @@
 package com.example.beatyourbestapp.ExercisesScreen;
 
+import static com.example.beatyourbestapp.SearchExercisesAdapter.exercisesList;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.beatyourbestapp.ExerciseDetail;
 import com.example.beatyourbestapp.Exercises;
+import com.example.beatyourbestapp.MainMenu;
 import com.example.beatyourbestapp.R;
 import com.example.beatyourbestapp.SearchExercises;
 import com.example.beatyourbestapp.WorkoutScreen.WorkoutItem;
@@ -37,14 +45,17 @@ public class ExercisesLayout extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ExercisesAdapter exercisesAdapter;
-    private static ArrayList<Exercises> exerciseList = new ArrayList<>();
+    private static ArrayList<Exercises> exercisesList = new ArrayList<>();
     private Button finishWorkoutButton;
     private Button cancelWorkoutButton;
 
+    private DatabaseReference workoutsRef;
+
     private Chronometer chronometer;
     private boolean running;
+
     public void startChronometer(View v) {
-        if(!running) {
+        if (!running) {
             chronometer.start();
             running = true;
         }
@@ -88,43 +99,50 @@ public class ExercisesLayout extends AppCompatActivity {
                 stopChronometer(v);
             }
         });
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String workoutID = sharedPreferences.getString("selectedWorkoutID", "");
+        String workoutNameString = sharedPreferences.getString("selectedWorkoutName", "");
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            String wName = bundle.getString("workoutName");
-            String wID = bundle.getString("workoutID");
+        editor.putString("workoutID", workoutID);
+        editor.apply();
+        workoutName.setText(workoutNameString);
 
-            if (wName != null && wID != null) {
-                workoutName.setText(wName + " ID: " + wID);
-            } else {
-                // Handle the case where either wName or wID is null
-                workoutName.setText(wName);
+
+        // ID of the workout you want to retrieve
+        String workoutId = sharedPreferences.getString("selectedWorkoutID", "");
+
+        // Retrieve "Exercises" array for the specified workout ID
+
+        ArrayList<Exercises> exercisesList = new ArrayList<>();
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Workouts").child(workoutNameString).child("Exercises");
+
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot exerciseSnapshot : snapshot.getChildren()){
+                    String exerciseName = exerciseSnapshot.child("exerciseName").getValue(String.class);
+                    String equipment = exerciseSnapshot.child("equipment").getValue(String.class);
+                    String target = exerciseSnapshot.child("target").getValue(String.class);
+                    int id = exerciseSnapshot.child("id").getValue(Integer.class);
+
+                    Exercises newExercise = new Exercises(exerciseName, equipment, target, id);
+                    exercisesList.add(newExercise);
+                }
+                exercisesAdapter.notifyDataSetChanged();
             }
-        } else {
-            // Handle the case where bundle is null
-            workoutName.setText("Workout Name Null");
-        }
-//        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Workouts");
-//        db.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                exerciseList.clear();
-//                for(DataSnapshot workoutSnapshot : snapshot.getChildren()){
-//                    String workoutName = workoutSnapshot.getKey();
-//                    String workoutDay = workoutSnapshot.child("Day").getValue(String.class);
-//                    String workoutID = workoutSnapshot.child("ID").getValue(String.class);
-//                    WorkoutItem workoutItem = new WorkoutItem(workoutName, workoutDay, workoutID);
-//                    exerciseList.add(workoutItem);
-//                }
-//                exercisesAdapter.notifyDataSetChanged();
-//            } @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         recyclerView = findViewById(R.id.exercises_recycler_view);
-        exercisesAdapter = new ExercisesAdapter(exerciseList);
+        exercisesAdapter = new ExercisesAdapter(exercisesList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(exercisesAdapter);
 
@@ -132,8 +150,10 @@ public class ExercisesLayout extends AppCompatActivity {
 
     }
 
+    //Redirects to SearchExercises
     public void addExercise(View view) {
-        //exerciseList.add(exercise);
+
+        Bundle bundle = getIntent().getExtras();
         Intent intent = new Intent(this, SearchExercises.class);
         startActivity(intent);
     }
@@ -178,7 +198,7 @@ public class ExercisesLayout extends AppCompatActivity {
                 // Handle database error
             }
         });
-        exerciseList.add(exercise);
+        exercisesList.add(exercise);
     }
 
 
@@ -198,5 +218,10 @@ public class ExercisesLayout extends AppCompatActivity {
         cancelWorkoutButton.setVisibility(View.VISIBLE);
         chronometer.setVisibility(View.VISIBLE);
         startChronometer(view);
+    }
+
+    public void backToWorkouts(View view) {
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 }

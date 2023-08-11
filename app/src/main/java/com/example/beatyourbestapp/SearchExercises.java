@@ -40,7 +40,7 @@ public class SearchExercises extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_exercises);
         searchView = findViewById(R.id.searchBarExercises);
-
+        String workoutID = getIntent().getStringExtra("workoutID");
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

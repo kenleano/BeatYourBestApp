@@ -23,7 +23,7 @@
 
             <TextView
                 android:id="@+id/workout_title"
-
+                android:onClick="backToWorkouts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dp"
@@ -86,9 +86,10 @@
                 android:background="@drawable/rounded_button_background"
                 android:backgroundTint="@color/green"
                 android:onClick="startExercise"
-                android:src="@drawable/baseline_start_24"
+
+                android:src="@drawable/baseline_play_arrow_24"
                 android:visibility="visible"
-                app:layout_constraintBaseline_toTopOf="parent"
+                app:layout_constraintBaseline_toTopOf="@id/exercises_recycler_view"
 
                 app:layout_constraintEnd_toEndOf="parent"
 

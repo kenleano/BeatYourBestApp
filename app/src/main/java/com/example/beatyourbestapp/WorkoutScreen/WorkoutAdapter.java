@@ -1,12 +1,16 @@
 package com.example.beatyourbestapp.WorkoutScreen;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -14,7 +18,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beatyourbestapp.ExerciseDetail;
+import com.example.beatyourbestapp.Exercises;
 import com.example.beatyourbestapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,6 +31,7 @@ import java.util.List;
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>  {
     private ArrayList<WorkoutItem> workoutList;
     private WorkoutFragment workoutFragment;
+
     private OnItemClickListener clickListener;
 
     public WorkoutAdapter(ArrayList<WorkoutItem> workoutList, WorkoutFragment workoutFragment) {
@@ -42,6 +50,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     public void onBindViewHolder(@NonNull WorkoutViewHolder holder, int position) {
         WorkoutItem workoutItem = workoutList.get(position);
         holder.workoutNameTextView.setText(workoutItem.getWorkoutName());
+        holder.workoutDay.setText(workoutItem.getWorkoutDay());
 //        holder.cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -65,6 +74,36 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
                 clickListener.onItemClick(position);
             }
         });
+
+        holder.deleteWorkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String workoutId = workoutList.get(position).getWorkoutId();
+                String workoutName = workoutList.get(position).getWorkoutName();
+
+                workoutList.remove(position);
+                notifyDataSetChanged();
+
+                DatabaseReference workoutsRef = FirebaseDatabase.getInstance().getReference("Workouts");
+                workoutsRef.child(workoutName).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // Workout deleted successfully
+                            Log.d(TAG, "Workout deleted successfully");
+                        } else {
+                            // Error occurred while deleting the workout
+                            Log.e(TAG, "Error deleting workout: " + task.getException().getMessage());
+                        }
+                    }
+                });
+
+                    notifyDataSetChanged();
+
+
+            }
+        });
     }
 
     @Override
@@ -79,11 +118,16 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
     }
 
     public static class WorkoutViewHolder extends RecyclerView.ViewHolder {
-        public TextView workoutNameTextView;
+        public TextView workoutNameTextView, workoutDay;
+        public View deleteWorkout;
+        public ImageButton deleteWorkoutButton;
 
         public WorkoutViewHolder(@NonNull View itemView) {
             super(itemView);
             workoutNameTextView = itemView.findViewById(R.id.workout_title);
+            workoutDay = itemView.findViewById(R.id.workout_day);
+            deleteWorkoutButton = itemView.findViewById(R.id.deleteWorkout);
+
         }
     }
 

@@ -69,9 +69,6 @@ public class AddWorkout extends AppCompatDialogFragment {
                 newWorkoutRef.child("Day").setValue(workoutDay);
                 newWorkoutRef.child("ID").setValue(workoutID);
 
-                exercisesRef.child("ID").setValue(3);
-                exercisesRef.child("Sets").setValue(3);
-                exercisesRef.child("Reps").setValue(12);
 
 
             }
