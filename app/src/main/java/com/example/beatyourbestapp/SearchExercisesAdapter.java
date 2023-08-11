@@ -39,7 +39,7 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Exercises exercises = exercisesList.get(position);
-        holder.name.setText(exercises.getExerciseName());
+        holder.name.setText(exercises.getExerciseName() + " (" + exercises.getId() + ")");
         holder.equipment.setText(exercises.getEquipment());
         holder.target.setText(exercises.getExerciseTarget());
 
@@ -51,11 +51,11 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
                 //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ExerciseDetail.class);
                 Bundle bundle = new Bundle();
-
                 bundle.putString("name", exercises.getExerciseName());
                 bundle.putString("equipment", exercises.getEquipment());
                 bundle.putString("target", exercises.getExerciseTarget());
                 bundle.putString("gif", exercises.getGifUrl());
+                bundle.putInt("id", exercises.getId());
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);

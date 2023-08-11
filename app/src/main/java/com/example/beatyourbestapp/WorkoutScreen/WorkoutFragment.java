@@ -3,6 +3,7 @@ package com.example.beatyourbestapp.WorkoutScreen;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.beatyourbestapp.AddWorkout;
-import com.example.beatyourbestapp.ExercisesLayout;
+import com.example.beatyourbestapp.ExercisesScreen.ExercisesLayout;
 import com.example.beatyourbestapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,28 +92,53 @@ public class WorkoutFragment extends Fragment implements AddWorkout.AddWorkoutLi
             }
         });
 
-        // Sample data for the RecyclerView
-        String workoutDay = "Monday";
-        List<WorkoutItem> workoutItems = new ArrayList<>();
-        workoutItems.add(new WorkoutItem("Workout 1", workoutDay));
-        workoutItems.add(new WorkoutItem("Workout 2", workoutDay));
-        workoutItems.add(new WorkoutItem("Workout 3", workoutDay));
-        // Add more workout items as needed
+        //Retrieve data from database
+
+        ArrayList<WorkoutItem> workoutList = new ArrayList<>();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Workouts");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                workoutList.clear();
+                for(DataSnapshot workoutSnapshot : snapshot.getChildren()){
+                    String workoutName = workoutSnapshot.getKey();
+                    String workoutDay = workoutSnapshot.child("Day").getValue(String.class);
+                    String workoutID = workoutSnapshot.child("ID").getValue(String.class);
+                    WorkoutItem workoutItem = new WorkoutItem(workoutName, workoutDay, workoutID);
+                    workoutList.add(workoutItem);
+                }
+                workoutAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // Create the WorkoutAdapter and pass the WorkoutFragment as a reference
-        WorkoutAdapter adapter = new WorkoutAdapter(workoutItems, this);
+        workoutAdapter = new WorkoutAdapter(workoutList, this);
 
         // Set the adapter to the RecyclerView
         RecyclerView recyclerView = rootView.findViewById(R.id.workoutRoutinesRecyclerView);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(workoutAdapter);
 
         // Set the item click listener
-        adapter.setOnItemClickListener(new WorkoutAdapter.OnItemClickListener() {
+        workoutAdapter.setOnItemClickListener(new WorkoutAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // Handle the click event here
                 // For example, you can navigate to a new XML file using Intent:
+                //pass data to next activity
+                WorkoutItem clickedItem = workoutList.get(position);
+                String workoutName = clickedItem.getWorkoutName();
+                String workoutID = clickedItem.getWorkoutId();
+                Bundle bundle = new Bundle();
+                bundle.putString("workoutName", workoutName);
+                bundle.putString("workoutID", workoutID);
+
                 Intent intent = new Intent(getContext(), ExercisesLayout.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -128,5 +159,6 @@ public class WorkoutFragment extends Fragment implements AddWorkout.AddWorkoutLi
     public void onWorkoutAdded(String workoutName, String workoutDay) {
         // Implement the logic to handle the workout name when it's added
         // to the database
+        workoutAdapter.addWorkout(new WorkoutItem(workoutName, workoutDay));
     }
 }

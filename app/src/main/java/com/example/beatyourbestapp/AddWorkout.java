@@ -1,5 +1,6 @@
 package com.example.beatyourbestapp;
 
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,6 +15,11 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class AddWorkout extends AppCompatDialogFragment {
     private EditText editTextWorkoutName;
@@ -53,6 +59,21 @@ public class AddWorkout extends AppCompatDialogFragment {
             // Process the workoutName if needed or call the listener to pass data back
             if (listener != null) {
                 listener.onWorkoutAdded(workoutName, workoutDay);
+
+                DatabaseReference workoutsRef = FirebaseDatabase.getInstance().getReference().child("Workouts");
+                DatabaseReference newWorkoutRef = workoutsRef.child(workoutName);
+                DatabaseReference exercisesRef = newWorkoutRef.child("Exercises");
+
+                String workoutID = workoutsRef.push().getKey();
+                newWorkoutRef.child("Name").setValue(workoutName);
+                newWorkoutRef.child("Day").setValue(workoutDay);
+                newWorkoutRef.child("ID").setValue(workoutID);
+
+                exercisesRef.child("ID").setValue(3);
+                exercisesRef.child("Sets").setValue(3);
+                exercisesRef.child("Reps").setValue(12);
+
+
             }
             dismiss(); // Dismiss the dialog after handling the button click
         });

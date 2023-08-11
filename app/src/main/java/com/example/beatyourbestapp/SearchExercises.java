@@ -84,9 +84,10 @@ public class SearchExercises extends AppCompatActivity {
                                 String equipment = jsonObject.getString("equipment");
                                 String imgUrl = jsonObject.getString("gifUrl");
                                 String name = jsonObject.getString("name");
+                                int exerciseId = jsonObject.getInt("id");
                                 //String instructions = jsonObject.getString("instructions");
 
-                                Exercises exercises = new Exercises(name, imgUrl, equipment, target);
+                                Exercises exercises = new Exercises(name, imgUrl, equipment, target, exerciseId);
                                 exercisesList.add(exercises);
 
                             }

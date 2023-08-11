@@ -37,8 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="29dp"
             android:layout_marginStart="16dp"
-            android:textSize="25sp"
-
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="30sp"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="5sp"
             app:layout_constraintLeft_toRightOf="@id/exercise_image"
             app:layout_constraintStart_toEndOf="@id/exercise_image"
             app:layout_constraintTop_toTopOf="parent"/>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:id="@+id/card_view"
+    android:id="@+id/exercise_set_card"
     android:layout_margin="5dp"
     app:cardBackgroundColor="#2C2C2E"
     app:cardCornerRadius="12dp"
@@ -25,10 +25,13 @@
         >
 
         <TextView
-            android:id="@+id/workout_title"
+            android:id="@+id/exercise_name"
             android:layout_width="match_parent"
             android:layout_height="39dp"
             android:textSize="30sp"
+            android:text="Exercise Name"
+            android:textStyle="bold"
+            android:textColor="@color/green"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="80dp" />
 
@@ -38,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="@string/set"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/workout_title"
+            android:layout_below="@id/exercise_name"
             />
         <TextView
             android:id="@+id/previous"
@@ -47,7 +50,17 @@
             android:layout_height="wrap_content"
             android:text="@string/previous"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/workout_title"
+            android:layout_below="@id/exercise_name"
+            android:layout_toEndOf="@id/set"
+            />
+        <TextView
+            android:id="@+id/set_reps"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:text="17.5kgx12"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/previous"
             android:layout_toEndOf="@id/set"
             />
         <TextView
@@ -56,22 +69,79 @@
             android:layout_height="wrap_content"
             android:text="@string/weight"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/workout_title"
+            android:layout_below="@id/exercise_name"
 
             android:layout_toStartOf="@id/reps"
             android:layout_marginEnd="50dp"
             />
 
+
         <TextView
             android:id="@+id/reps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/workout_title"
-            android:layout_alignEnd="@id/workout_title"
+            android:layout_below="@id/exercise_name"
+            android:layout_alignEnd="@id/exercise_name"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="75dp"
-
             android:text="@string/reps" />
+
+        <EditText
+            android:id="@+id/editWeight"
+            android:layout_width="60dp"
+            android:background="@drawable/rounded_outline"
+            android:layout_height="25dp"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/weight"
+            android:layout_alignStart="@id/weight"/>
+
+        <EditText
+            android:id="@+id/editReps"
+            android:layout_width="60dp"
+            android:background="@drawable/rounded_outline"
+            android:layout_height="25dp"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/reps"
+            android:layout_alignStart="@id/reps"
+            android:layout_centerHorizontal="true"/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/rounded_button_background"
+           android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:src="@drawable/baseline_check_24"
+            android:layout_toRightOf="@id/editReps"
+            android:layout_alignBottom="@id/editReps"/>
+
+        <ImageButton
+            android:id="@+id/deleteExercise"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/rounded_button_background"
+            android:backgroundTint="@color/green"
+            android:src="@drawable/baseline_delete_24"
+
+            android:layout_toRightOf="@id/editReps"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:id="@+id/addSet"-->
+<!--            android:text="Add Set"-->
+<!--            android:textSize="12sp"-->
+<!--            android:background="@drawable/rounded_button_background"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_below="@id/editReps"-->
+<!--            android:layout_marginTop="10dp" />-->
 
     </RelativeLayout>
 

@@ -10,7 +10,7 @@ import com.example.beatyourbestapp.WorkoutScreen.WorkoutFragment;
 import com.example.beatyourbestapp.WorkoutScreen.WorkoutItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainMenu extends AppCompatActivity implements AddWorkout.AddWorkoutListener {
+public class MainMenu extends AppCompatActivity implements AddWorkout.AddWorkoutListener  {
     BottomNavigationView bottomNavigationView;
     HistoryFragment historyFragment = new HistoryFragment();
     ProfileFragment profileFragment = new ProfileFragment();

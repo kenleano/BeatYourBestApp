@@ -27,6 +27,27 @@ public class Exercises {
     public Exercises(String name, String equipment, String bodyPart) {
     }
 
+    public Exercises(String name, String imgUrl, String equipment, String target, int exerciseId) {
+        this.exerciseName = name;
+        this.gifUrl = imgUrl;
+        this.equipment = equipment;
+        this.exerciseTarget = target;
+        this.id = exerciseId;
+
+    }
+
+    public Exercises(String exerciseName, Integer id) {
+        this.exerciseName = exerciseName;
+        this.id = id;
+    }
+
+    public Exercises(String exerciseName, String equipment, String target, Integer id) {
+        this.exerciseName = exerciseName;
+        this.equipment = equipment;
+        this.exerciseTarget = target;
+        this.id = id;
+    }
+
     public String getExerciseName() {
         return exerciseName;
     }
