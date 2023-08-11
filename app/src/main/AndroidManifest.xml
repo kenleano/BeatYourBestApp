@@ -16,17 +16,17 @@
         <activity
             android:name=".ExerciseDetail" />
 
-        <activity android:name=".LoginAndRegister.Register" />
+
         <activity android:name=".SearchExercises" />
         <activity android:name=".MainActivity" />
-<!--        <activity android:name=".MainMenu" />-->
+        <activity android:name=".MainMenu" />
 
         <activity android:name=".ExercisesScreen.ExercisesLayout"
 />
-        <!--        <activity android:name=".LoginAndRegister.Register" />-->
-        <activity android:name=".LoginAndRegister.Login" />
+                <activity android:name=".LoginAndRegister.Register" />
+<!--        <activity android:name=".LoginAndRegister.Login" />-->
         <activity
-            android:name=".MainMenu"
+            android:name=".LoginAndRegister.Login"
         android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

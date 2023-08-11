@@ -22,6 +22,7 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
     private ArrayList<Exercises> filteredList;
     private Context context;
 
+
     public SearchExercisesAdapter(Context context, ArrayList<Exercises> exercisesList) {
         this.context = context;
         this.exercisesList = exercisesList;
@@ -55,7 +56,7 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
                 bundle.putString("equipment", exercises.getEquipment());
                 bundle.putString("target", exercises.getExerciseTarget());
                 bundle.putString("gif", exercises.getGifUrl());
-                bundle.putInt("id", exercises.getId());
+                bundle.putInt("exerciseID", exercises.getId());
 
                 intent.putExtras(bundle);
                 context.startActivity(intent);
