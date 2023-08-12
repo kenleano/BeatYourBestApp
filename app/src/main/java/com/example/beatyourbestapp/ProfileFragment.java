@@ -31,7 +31,7 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    public Button button;
+    public Button logOutButton;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -58,29 +58,25 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // button = rootView.findViewById(R.id.btnLogout);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//
-//        auth = FirebaseAuth.getInstance();
-//        user = auth.getCurrentUser();
-//        if (user == null) {
-//            // No user is signed in
-//            Intent intent = new Intent(getContext(), Login.class);
-//            startActivity(intent);
-//
-//        } else {
-//            // User logged in
-//        }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        logOutButton = view.findViewById(R.id.btnLogout);
+
+
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logOut(v);
+            }
+        });
+    return view;
     }
 
     public void logOut(View view) {

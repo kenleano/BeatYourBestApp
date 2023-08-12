@@ -8,7 +8,9 @@ public class Exercises {
     private String exerciseTarget;
     private int id;
     private String SetReps;
-
+    public Exercises() {
+        // Default no-argument constructor
+    }
     public Exercises(String exerciseName, String bodyPart, String equipment, String gifUrl, String exerciseTarget, int id) {
         this.exerciseName = exerciseName;
         this.bodyPart = bodyPart;

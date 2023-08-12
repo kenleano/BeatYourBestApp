@@ -10,9 +10,13 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ import com.example.beatyourbestapp.Exercises;
 import com.example.beatyourbestapp.MainMenu;
 import com.example.beatyourbestapp.R;
 import com.example.beatyourbestapp.SearchExercises;
+import com.example.beatyourbestapp.WorkoutHistory;
 import com.example.beatyourbestapp.WorkoutScreen.WorkoutItem;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +41,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -59,6 +67,7 @@ public class ExercisesLayout extends AppCompatActivity {
             chronometer.start();
             running = true;
         }
+
     }
 
     public void stopChronometer(View v) {
@@ -70,6 +79,42 @@ public class ExercisesLayout extends AppCompatActivity {
         running = false;
 
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String workoutName = sharedPreferences.getString("selectedWorkoutName", "");
+
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Define the desired date and time format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String dateTime = dateFormat.format(currentDate);
+
+        DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("WorkoutHistory");
+
+        String historyId = historyRef.push().getKey();
+
+        WorkoutHistory workoutHistory = new WorkoutHistory();
+        workoutHistory.setWorkoutName(workoutName);
+        workoutHistory.setExerciseName(exercisesList);
+        workoutHistory.setDateTime(dateTime);
+
+        historyRef.child(workoutName + " " + currentDate).setValue(workoutHistory);
+
+        showPopupMessage("Workout Finished!");
+
+
+
+    }
+
+    public void cancelWorkout(View v) {
+        finishWorkoutButton.setVisibility(View.GONE);
+        cancelWorkoutButton.setVisibility(View.GONE);
+        chronometer.setVisibility(View.GONE);
+        chronometer.stop();
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        running = false;
+
+        showPopupMessage("Workout Cancelled");
     }
 
     @Override
@@ -96,7 +141,7 @@ public class ExercisesLayout extends AppCompatActivity {
         cancelWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopChronometer(v);
+                cancelWorkout(v);
             }
         });
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -226,4 +271,36 @@ public class ExercisesLayout extends AppCompatActivity {
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
+
+    private void showPopupMessage(String message) {
+        View popupView = LayoutInflater.from(this).inflate(R.layout.popup_message, null);
+        PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true
+        );
+
+        // Set animation style (optional)
+        //popupWindow.setAnimationStyle(R.style.PopupAnimation);
+
+        // Set the message text
+        TextView textViewMessage = popupView.findViewById(R.id.textViewTitle);
+        textViewMessage.setText(message);
+
+        // Find and set the close button click listener
+        Button btnClose = popupView.findViewById(R.id.btnClosePopup);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+                Intent intent = new Intent(ExercisesLayout.this, MainMenu.class);
+                startActivity(intent);
+            }
+        });
+
+        // Show the popup
+        popupWindow.showAtLocation(findViewById(R.id.exercise_linear_layout), Gravity.CENTER, 0, 0);
+    }
+
 }

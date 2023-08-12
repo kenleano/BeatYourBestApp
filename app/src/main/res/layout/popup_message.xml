@@ -1,0 +1,30 @@
+<!-- res/layout/popup_message.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/rounded_medium"
+    android:backgroundTint="@color/lightgray">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Workout Finished!"
+        android:textSize="30sp"
+        android:id="@+id/textViewTitle"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/btnClosePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:background="@drawable/rounded_button_background"
+        android:text="Close"
+        android:textColor="@color/darkgray"
+        android:layout_gravity="center"
+
+         />
+</LinearLayout>
