@@ -23,41 +23,45 @@
         android:padding="7dp"
 
         >
-        <ImageView
+        <com.example.beatyourbestapp.RoundedImageView
             android:id="@+id/exercise_image"
             android:layout_width="75dp"
             android:layout_height="75dp"
-
-            android:background="@drawable/circle"
+            android:background="@drawable/rounded_shape"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
         <TextView
             android:id="@+id/exercise_name"
             android:layout_width="wrap_content"
-            android:layout_height="29dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:textStyle="bold"
-            app:autoSizeMaxTextSize="30sp"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="5sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            android:text="EXERCISE NAME"
+            android:textSize="20dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             app:layout_constraintLeft_toRightOf="@id/exercise_image"
             app:layout_constraintStart_toEndOf="@id/exercise_image"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:layout_width="236dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:id="@+id/exercise_target"
             app:layout_constraintLeft_toRightOf="@id/exercise_image"
             app:layout_constraintStart_toEndOf="@id/exercise_image"
             app:layout_constraintTop_toBottomOf="@id/exercise_name"/>
 
         <TextView
-            android:layout_width="236dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/green"

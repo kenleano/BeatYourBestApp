@@ -85,7 +85,7 @@ public class ProfileFragment extends Fragment {
 
     public void logOut(View view) {
         FirebaseAuth.getInstance().signOut();
-        // You might want to navigate to the login screen after logging out
+
         Intent intent = new Intent(getContext(), Login.class);
         startActivity(intent);
     }

@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -40,11 +43,16 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Exercises exercises = exercisesList.get(position);
-        holder.name.setText(exercises.getExerciseName() + " (" + exercises.getId() + ")");
+        holder.name.setText(exercises.getExerciseName());
         holder.equipment.setText(exercises.getEquipment());
         holder.target.setText(exercises.getExerciseTarget());
 
         Picasso.get().load(exercises.getGifUrl()).into(holder.image);
+
+        Glide.with(context)
+                .load(exercises.getGifUrl()) // Replace with the actual image URL or resource
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(16))) // Set corner radius
+                .into(holder.image);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +90,7 @@ public class SearchExercisesAdapter extends RecyclerView.Adapter<SearchExercises
             equipment = itemView.findViewById(R.id.exercise_equipment);
             target = itemView.findViewById(R.id.exercise_target);
            cardView = itemView.findViewById(R.id.exercises_card);
+            name.setSelected(true);
 
         }
     }

@@ -9,8 +9,9 @@
     <ImageView
         android:id="@+id/detail_exercise_image"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -31,10 +33,12 @@
 
     <TextView
         android:id="@+id/detail_exercise_target"
-        android:layout_width="90dp"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
         android:layout_marginTop="8dp"
+        android:textAllCaps="true"
         android:text="TextView"
         android:textColor="#03B50A"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,10 +49,10 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
-        android:layout_marginTop="17dp"
+        android:textAllCaps="true"
         android:layout_marginEnd="19dp"
         android:text="detail test"
-        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_exercise_target" />
     <Button

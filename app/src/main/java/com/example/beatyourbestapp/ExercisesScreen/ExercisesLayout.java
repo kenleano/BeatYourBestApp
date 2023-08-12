@@ -114,21 +114,33 @@ public class ExercisesLayout extends AppCompatActivity {
 
         // Retrieve "Exercises" array for the specified workout ID
 
-        ArrayList<Exercises> exercisesList = new ArrayList<>();
+        //ArrayList<Exercises> exercisesList = new ArrayList<>();
 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Workouts").child(workoutNameString).child("Exercises");
 
         db.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for(DataSnapshot exerciseSnapshot : snapshot.getChildren()){
+                exercisesList.clear();
+                for (DataSnapshot exerciseSnapshot : snapshot.getChildren()) {
                     String exerciseName = exerciseSnapshot.child("exerciseName").getValue(String.class);
                     String equipment = exerciseSnapshot.child("equipment").getValue(String.class);
                     String target = exerciseSnapshot.child("target").getValue(String.class);
+                    String Reps = exerciseSnapshot.child("Sets").child("Reps").getValue(String.class);
+                    String Weight = exerciseSnapshot.child("Sets").child("Weight").getValue(String.class);
+
+                    if(Reps == null){
+                        Reps = "0";
+                    }
+                    if(Weight == null){
+                        Weight = "0";
+                    }
+
+                    String SetReps = Weight + "kg x " + Reps;
                     int id = exerciseSnapshot.child("id").getValue(Integer.class);
 
-                    Exercises newExercise = new Exercises(exerciseName, equipment, target, id);
+                    Exercises newExercise = new Exercises(exerciseName, equipment, target, id, SetReps);
                     exercisesList.add(newExercise);
                 }
                 exercisesAdapter.notifyDataSetChanged();
@@ -142,7 +154,9 @@ public class ExercisesLayout extends AppCompatActivity {
 
 
         recyclerView = findViewById(R.id.exercises_recycler_view);
-        exercisesAdapter = new ExercisesAdapter(exercisesList);
+        exercisesAdapter = new ExercisesAdapter(this, exercisesList); // if inside an activity
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(exercisesAdapter);
 
@@ -199,18 +213,6 @@ public class ExercisesLayout extends AppCompatActivity {
             }
         });
         exercisesList.add(exercise);
-    }
-
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Bundle bundle = getIntent().getExtras();
-
-        // Save your data to the outState bundle
-//        outState.putString("workoutName", workoutName.getText().toString());
-//        outState.putString("workoutID", workoutID); // Assuming workoutID is a String variable
-        // ... Save any other data you want to retain
     }
 
     public void startExercise(View view) {

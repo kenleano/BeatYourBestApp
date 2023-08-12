@@ -28,12 +28,19 @@
             android:id="@+id/exercise_name"
             android:layout_width="match_parent"
             android:layout_height="39dp"
-            android:textSize="30sp"
+            android:gravity="bottom"
             android:text="Exercise Name"
             android:textStyle="bold"
             android:textColor="@color/green"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="80dp" />
+            tools:layout_editor_absoluteX="80dp"
+            android:textSize="30sp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"/>
 
         <TextView
             android:id="@+id/set"
@@ -93,6 +100,8 @@
             android:layout_height="25dp"
             android:ems="10"
             android:inputType="number"
+            android:hint="kg"
+            android:gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:layout_below="@id/weight"
             android:layout_alignStart="@id/weight"/>
@@ -102,7 +111,9 @@
             android:layout_width="60dp"
             android:background="@drawable/rounded_outline"
             android:layout_height="25dp"
-            android:ems="10"
+            android:hint="0"
+            android:gravity="center_horizontal"
+            android:ems="0"
             android:inputType="number"
             android:layout_marginTop="8dp"
             android:layout_below="@id/reps"
@@ -110,6 +121,7 @@
             android:layout_centerHorizontal="true"/>
         <ImageButton
             android:layout_width="30dp"
+            android:id="@+id/finishSetBtn"
             android:layout_height="30dp"
             android:background="@drawable/rounded_button_background"
            android:layout_marginStart="10dp"

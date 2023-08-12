@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.beatyourbestapp.ExercisesScreen.ExercisesAdapter;
 import com.example.beatyourbestapp.ExercisesScreen.ExercisesLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -35,18 +38,26 @@ public class ExerciseDetail extends AppCompatActivity {
         TextView name = findViewById(R.id.detail_exercise_name);
         TextView equipment = findViewById(R.id.detail_exercise_equipment);
 
+
+
         Bundle bundle = getIntent().getExtras();
 
         String dName = bundle.getString("name");
         String dTarget = bundle.getString("target");
         String dEquipment = bundle.getString("equipment");
         String dGifUrl = bundle.getString("gif");
+
         Integer exerciseID = bundle.getInt("exerciseID");
+        Glide.with(this)
+                .load(dGifUrl) // Replace with the actual image URL
+                .apply(RequestOptions.fitCenterTransform()) // Maintain aspect ratio
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(image);
 
         Picasso.get().load(dGifUrl).into(image);
         equipment.setText(dEquipment);
         target.setText(dTarget);
-        name.setText(dName + " ID: " + exerciseID);
+        name.setText(dName);
 
     }
 

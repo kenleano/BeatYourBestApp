@@ -7,6 +7,7 @@ public class Exercises {
     private String gifUrl;
     private String exerciseTarget;
     private int id;
+    private String SetReps;
 
     public Exercises(String exerciseName, String bodyPart, String equipment, String gifUrl, String exerciseTarget, int id) {
         this.exerciseName = exerciseName;
@@ -46,6 +47,14 @@ public class Exercises {
         this.equipment = equipment;
         this.exerciseTarget = target;
         this.id = id;
+    }
+
+    public Exercises(String exerciseName, String equipment, String target, int id, String setReps) {
+        this.exerciseName = exerciseName;
+        this.equipment = equipment;
+        this.exerciseTarget = target;
+        this.id = id;
+        this.SetReps = setReps;
     }
 
     public String getExerciseName() {
@@ -94,5 +103,9 @@ public class Exercises {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSetReps() {
+    return SetReps;
     }
 }

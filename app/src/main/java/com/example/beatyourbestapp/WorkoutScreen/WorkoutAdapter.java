@@ -17,6 +17,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.beatyourbestapp.ExerciseDetail;
 import com.example.beatyourbestapp.Exercises;
 import com.example.beatyourbestapp.R;
@@ -51,6 +54,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         WorkoutItem workoutItem = workoutList.get(position);
         holder.workoutNameTextView.setText(workoutItem.getWorkoutName());
         holder.workoutDay.setText(workoutItem.getWorkoutDay());
+
 //        holder.cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
